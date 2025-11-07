@@ -1,9 +1,9 @@
 // Unit Tests for PostCard Component
 
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import PostCard from '../../components/PostCard';
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import PostCard from "../../components/PostCard";
 
 describe("PostCard Component", () => {
   const mockPost = {
