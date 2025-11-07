@@ -1,25 +1,27 @@
 // Button Component - Reusable button with variants and sizes
 
-import React from 'react';
-import './Button.css';
+import React from "react";
+import "./Button.css";
 
 const Button = ({
   children,
   onClick,
-  variant = 'primary',
-  size = 'md',
+  variant = "primary",
+  size = "md",
   disabled = false,
-  className = '',
-  type = 'button',
+  className = "",
+  type = "button",
   ...props
 }) => {
   const buttonClasses = `
     btn
     btn-${variant}
     btn-${size}
-    ${disabled ? 'btn-disabled' : ''}
+    ${disabled ? "btn-disabled" : ""}
     ${className}
-  `.trim().replace(/\s+/g, ' ');
+  `
+    .trim()
+    .replace(/\s+/g, " ");
 
   const handleClick = (e) => {
     if (!disabled && onClick) {

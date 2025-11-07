@@ -1,31 +1,31 @@
 // Form Component - Reusable form with validation
 
-import React, { useState } from 'react';
-import Button from './Button';
-import Input from './Input';
-import './Form.css';
+import React, { useState } from "react";
+import Button from "./Button";
+import Input from "./Input";
+import "./Form.css";
 
 const Form = ({
   fields,
   onSubmit,
-  submitText = 'Submit',
+  submitText = "Submit",
   isLoading = false,
-  initialValues = {}
+  initialValues = {},
 }) => {
   const [formData, setFormData] = useState(initialValues);
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
     // Clear error for this field
     if (errors[name]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [name]: ''
+        [name]: "",
       }));
     }
   };
@@ -33,8 +33,8 @@ const Form = ({
   const validate = () => {
     const newErrors = {};
 
-    fields.forEach(field => {
-      const value = formData[field.name] || '';
+    fields.forEach((field) => {
+      const value = formData[field.name] || "";
 
       if (field.required && !value.trim()) {
         newErrors[field.name] = `${field.label} is required`;
@@ -66,13 +66,13 @@ const Form = ({
 
   return (
     <form onSubmit={handleSubmit} className="form" noValidate>
-      {fields.map(field => (
+      {fields.map((field) => (
         <Input
           key={field.name}
           label={field.label}
-          type={field.type || 'text'}
+          type={field.type || "text"}
           name={field.name}
-          value={formData[field.name] || ''}
+          value={formData[field.name] || ""}
           onChange={handleChange}
           error={errors[field.name]}
           placeholder={field.placeholder}
@@ -86,7 +86,7 @@ const Form = ({
         disabled={isLoading}
         className="form-submit-button"
       >
-        {isLoading ? 'Loading...' : submitText}
+        {isLoading ? "Loading..." : submitText}
       </Button>
     </form>
   );

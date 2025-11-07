@@ -1,7 +1,7 @@
 // ErrorBoundary Component - Catch React errors and display fallback UI
 
-import React from 'react';
-import './ErrorBoundary.css';
+import React from "react";
+import "./ErrorBoundary.css";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class ErrorBoundary extends React.Component {
     this.state = {
       hasError: false,
       error: null,
-      errorInfo: null
+      errorInfo: null,
     };
   }
 
@@ -18,11 +18,11 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
-    
+    console.error("ErrorBoundary caught an error:", error, errorInfo);
+
     this.setState({
       error,
-      errorInfo
+      errorInfo,
     });
 
     // Log error to monitoring service (e.g., Sentry, LogRocket)
@@ -35,7 +35,7 @@ class ErrorBoundary extends React.Component {
     this.setState({
       hasError: false,
       error: null,
-      errorInfo: null
+      errorInfo: null,
     });
   };
 
@@ -50,8 +50,8 @@ class ErrorBoundary extends React.Component {
           <div className="error-boundary-content">
             <h1>Oops! Something went wrong</h1>
             <p>We're sorry for the inconvenience. Please try again later.</p>
-            
-            {process.env.NODE_ENV === 'development' && this.state.error && (
+
+            {process.env.NODE_ENV === "development" && this.state.error && (
               <details className="error-details">
                 <summary>Error Details (Development Mode)</summary>
                 <pre className="error-message">
@@ -62,7 +62,7 @@ class ErrorBoundary extends React.Component {
                 </pre>
               </details>
             )}
-            
+
             <button
               className="error-boundary-button"
               onClick={this.handleReset}

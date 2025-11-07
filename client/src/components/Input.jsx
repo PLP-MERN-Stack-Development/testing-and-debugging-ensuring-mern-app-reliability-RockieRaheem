@@ -1,11 +1,11 @@
 // Input Component - Reusable input field with validation
 
-import React, { useState } from 'react';
-import './Input.css';
+import React, { useState } from "react";
+import "./Input.css";
 
 const Input = ({
   label,
-  type = 'text',
+  type = "text",
   name,
   value,
   onChange,
@@ -14,7 +14,7 @@ const Input = ({
   placeholder,
   required = false,
   disabled = false,
-  className = '',
+  className = "",
   ...props
 }) => {
   const [touched, setTouched] = useState(false);
@@ -46,7 +46,7 @@ const Input = ({
         placeholder={placeholder}
         required={required}
         disabled={disabled}
-        className={`input-field ${showError ? 'input-error' : ''}`}
+        className={`input-field ${showError ? "input-error" : ""}`}
         aria-invalid={showError}
         aria-describedby={showError ? `${name}-error` : undefined}
         {...props}

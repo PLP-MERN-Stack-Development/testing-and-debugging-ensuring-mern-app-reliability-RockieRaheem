@@ -1,8 +1,8 @@
 // PostList Component - Display list of posts
 
-import React from 'react';
-import PostCard from './PostCard';
-import './PostList.css';
+import React from "react";
+import PostCard from "./PostCard";
+import "./PostList.css";
 
 const PostList = ({
   posts = [],
@@ -10,7 +10,7 @@ const PostList = ({
   error = null,
   onEdit,
   onDelete,
-  onLike
+  onLike,
 }) => {
   if (loading) {
     return (
@@ -38,7 +38,7 @@ const PostList = ({
 
   return (
     <div className="post-list">
-      {posts.map(post => (
+      {posts.map((post) => (
         <PostCard
           key={post._id}
           post={post}

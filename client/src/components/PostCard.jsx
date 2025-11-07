@@ -1,8 +1,8 @@
 // PostCard Component - Display individual post
 
-import React from 'react';
-import Button from './Button';
-import './PostCard.css';
+import React from "react";
+import Button from "./Button";
+import "./PostCard.css";
 
 const PostCard = ({ post, onEdit, onDelete, onLike }) => {
   const {
@@ -13,14 +13,14 @@ const PostCard = ({ post, onEdit, onDelete, onLike }) => {
     category,
     views = 0,
     likes = 0,
-    createdAt
+    createdAt,
   } = post;
 
   const formatDate = (date) => {
-    return new Date(date).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
+    return new Date(date).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
     });
   };
 
@@ -32,21 +32,19 @@ const PostCard = ({ post, onEdit, onDelete, onLike }) => {
           <span className="post-category">{category.name || category}</span>
         )}
       </div>
-      
+
       <p className="post-content">{content}</p>
-      
+
       <div className="post-meta">
-        <span className="post-author">
-          By {author?.username || 'Unknown'}
-        </span>
+        <span className="post-author">By {author?.username || "Unknown"}</span>
         <span className="post-date">{formatDate(createdAt)}</span>
       </div>
-      
+
       <div className="post-stats">
         <span className="stat">👁 {views} views</span>
         <span className="stat">❤ {likes} likes</span>
       </div>
-      
+
       <div className="post-actions">
         {onLike && (
           <Button
