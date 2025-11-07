@@ -1,7 +1,7 @@
 // Test Setup - Configure testing environment for server
 
-const mongoose = require('mongoose');
-const { MongoMemoryServer } = require('mongodb-memory-server');
+const mongoose = require("mongoose");
+const { MongoMemoryServer } = require("mongodb-memory-server");
 
 let mongoServer;
 

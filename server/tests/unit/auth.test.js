@@ -1,30 +1,34 @@
 // Unit Tests for Authentication Utilities
 
-const { generateToken, verifyToken, extractToken } = require('../../src/utils/auth');
+const {
+  generateToken,
+  verifyToken,
+  extractToken,
+} = require("../../src/utils/auth");
 
-describe('Authentication Utilities', () => {
-  describe('generateToken', () => {
-    it('should generate a valid JWT token', () => {
+describe("Authentication Utilities", () => {
+  describe("generateToken", () => {
+    it("should generate a valid JWT token", () => {
       const user = {
-        _id: '507f1f77bcf86cd799439011',
-        username: 'testuser',
-        email: 'test@example.com',
-        role: 'user'
+        _id: "507f1f77bcf86cd799439011",
+        username: "testuser",
+        email: "test@example.com",
+        role: "user",
       };
 
       const token = generateToken(user);
 
       expect(token).toBeDefined();
-      expect(typeof token).toBe('string');
-      expect(token.split('.')).toHaveLength(3); // JWT has 3 parts
+      expect(typeof token).toBe("string");
+      expect(token.split(".")).toHaveLength(3); // JWT has 3 parts
     });
 
-    it('should include user information in token payload', () => {
+    it("should include user information in token payload", () => {
       const user = {
-        _id: '507f1f77bcf86cd799439011',
-        username: 'testuser',
-        email: 'test@example.com',
-        role: 'admin'
+        _id: "507f1f77bcf86cd799439011",
+        username: "testuser",
+        email: "test@example.com",
+        role: "admin",
       };
 
       const token = generateToken(user);
@@ -37,13 +41,13 @@ describe('Authentication Utilities', () => {
     });
   });
 
-  describe('verifyToken', () => {
-    it('should verify and decode a valid token', () => {
+  describe("verifyToken", () => {
+    it("should verify and decode a valid token", () => {
       const user = {
-        _id: '507f1f77bcf86cd799439011',
-        username: 'testuser',
-        email: 'test@example.com',
-        role: 'user'
+        _id: "507f1f77bcf86cd799439011",
+        username: "testuser",
+        email: "test@example.com",
+        role: "user",
       };
 
       const token = generateToken(user);
@@ -53,24 +57,24 @@ describe('Authentication Utilities', () => {
       expect(decoded.id).toBe(user._id);
     });
 
-    it('should throw error for invalid token', () => {
-      const invalidToken = 'invalid.token.here';
+    it("should throw error for invalid token", () => {
+      const invalidToken = "invalid.token.here";
 
       expect(() => {
         verifyToken(invalidToken);
-      }).toThrow('Invalid or expired token');
+      }).toThrow("Invalid or expired token");
     });
 
-    it('should throw error for malformed token', () => {
+    it("should throw error for malformed token", () => {
       expect(() => {
-        verifyToken('not-a-token');
+        verifyToken("not-a-token");
       }).toThrow();
     });
   });
 
-  describe('extractToken', () => {
-    it('should extract token from Bearer authorization header', () => {
-      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
+  describe("extractToken", () => {
+    it("should extract token from Bearer authorization header", () => {
+      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9";
       const authHeader = `Bearer ${token}`;
 
       const extracted = extractToken(authHeader);
@@ -78,14 +82,14 @@ describe('Authentication Utilities', () => {
       expect(extracted).toBe(token);
     });
 
-    it('should return null for missing authorization header', () => {
+    it("should return null for missing authorization header", () => {
       const extracted = extractToken(null);
 
       expect(extracted).toBeNull();
     });
 
-    it('should return null for authorization header without Bearer', () => {
-      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
+    it("should return null for authorization header without Bearer", () => {
+      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9";
       const authHeader = `Token ${token}`;
 
       const extracted = extractToken(authHeader);
@@ -93,8 +97,8 @@ describe('Authentication Utilities', () => {
       expect(extracted).toBeNull();
     });
 
-    it('should return null for empty authorization header', () => {
-      const extracted = extractToken('');
+    it("should return null for empty authorization header", () => {
+      const extracted = extractToken("");
 
       expect(extracted).toBeNull();
     });
