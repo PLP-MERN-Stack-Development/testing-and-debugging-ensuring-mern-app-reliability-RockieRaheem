@@ -1,9 +1,9 @@
 // Post Controller - Handle post CRUD operations
 
-const Post = require('../models/Post');
-const { validateObjectId, validatePagination } = require('../utils/validation');
-const { asyncHandler, AppError } = require('../middleware/errorHandler');
-const logger = require('../utils/logger');
+const Post = require("../models/Post");
+const { validateObjectId, validatePagination } = require("../utils/validation");
+const { asyncHandler, AppError } = require("../middleware/errorHandler");
+const logger = require("../utils/logger");
 
 /**
  * @desc    Get all posts
@@ -20,15 +20,19 @@ const getPosts = asyncHandler(async (req, res) => {
   if (author) query.author = author;
 
   // Pagination
-  const { page: validPage, limit: validLimit, skip } = validatePagination(page, limit);
+  const {
+    page: validPage,
+    limit: validLimit,
+    skip,
+  } = validatePagination(page, limit);
 
   // Sorting
-  const sortOption = sort === 'oldest' ? { createdAt: 1 } : { createdAt: -1 };
+  const sortOption = sort === "oldest" ? { createdAt: 1 } : { createdAt: -1 };
 
   // Execute query
   const posts = await Post.find(query)
-    .populate('author', 'username email')
-    .populate('category', 'name slug')
+    .populate("author", "username email")
+    .populate("category", "name slug")
     .sort(sortOption)
     .limit(validLimit)
     .skip(skip);
@@ -43,7 +47,7 @@ const getPosts = asyncHandler(async (req, res) => {
     total,
     page: validPage,
     pages: Math.ceil(total / validLimit),
-    data: posts
+    data: posts,
   });
 });
 
@@ -56,15 +60,15 @@ const getPost = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
   if (!validateObjectId(id)) {
-    throw new AppError('Invalid post ID', 400);
+    throw new AppError("Invalid post ID", 400);
   }
 
   const post = await Post.findById(id)
-    .populate('author', 'username email')
-    .populate('category', 'name slug');
+    .populate("author", "username email")
+    .populate("category", "name slug");
 
   if (!post) {
-    throw new AppError('Post not found', 404);
+    throw new AppError("Post not found", 404);
   }
 
   // Increment views
@@ -75,7 +79,7 @@ const getPost = asyncHandler(async (req, res) => {
 
   res.json({
     success: true,
-    data: post
+    data: post,
   });
 });
 
@@ -88,7 +92,7 @@ const createPost = asyncHandler(async (req, res) => {
   const { title, content, category, tags, status } = req.body;
 
   if (!title || !content) {
-    throw new AppError('Please provide title and content', 400);
+    throw new AppError("Please provide title and content", 400);
   }
 
   const post = await Post.create({
@@ -96,17 +100,17 @@ const createPost = asyncHandler(async (req, res) => {
     content,
     category,
     tags,
-    status: status || 'draft',
-    author: req.user._id
+    status: status || "draft",
+    author: req.user._id,
   });
 
-  await post.populate('author', 'username email');
+  await post.populate("author", "username email");
 
   logger.info(`Post created: ${post.title} by ${req.user.username}`);
 
   res.status(201).json({
     success: true,
-    data: post
+    data: post,
   });
 });
 
@@ -119,18 +123,21 @@ const updatePost = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
   if (!validateObjectId(id)) {
-    throw new AppError('Invalid post ID', 400);
+    throw new AppError("Invalid post ID", 400);
   }
 
   let post = await Post.findById(id);
 
   if (!post) {
-    throw new AppError('Post not found', 404);
+    throw new AppError("Post not found", 404);
   }
 
   // Check ownership
-  if (post.author.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
-    throw new AppError('Not authorized to update this post', 403);
+  if (
+    post.author.toString() !== req.user._id.toString() &&
+    req.user.role !== "admin"
+  ) {
+    throw new AppError("Not authorized to update this post", 403);
   }
 
   const { title, content, category, tags, status } = req.body;
@@ -139,13 +146,13 @@ const updatePost = asyncHandler(async (req, res) => {
     id,
     { title, content, category, tags, status },
     { new: true, runValidators: true }
-  ).populate('author', 'username email');
+  ).populate("author", "username email");
 
   logger.info(`Post updated: ${post.title} by ${req.user.username}`);
 
   res.json({
     success: true,
-    data: post
+    data: post,
   });
 });
 
@@ -158,18 +165,21 @@ const deletePost = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
   if (!validateObjectId(id)) {
-    throw new AppError('Invalid post ID', 400);
+    throw new AppError("Invalid post ID", 400);
   }
 
   const post = await Post.findById(id);
 
   if (!post) {
-    throw new AppError('Post not found', 404);
+    throw new AppError("Post not found", 404);
   }
 
   // Check ownership
-  if (post.author.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
-    throw new AppError('Not authorized to delete this post', 403);
+  if (
+    post.author.toString() !== req.user._id.toString() &&
+    req.user.role !== "admin"
+  ) {
+    throw new AppError("Not authorized to delete this post", 403);
   }
 
   await post.deleteOne();
@@ -178,7 +188,7 @@ const deletePost = asyncHandler(async (req, res) => {
 
   res.json({
     success: true,
-    message: 'Post deleted successfully'
+    message: "Post deleted successfully",
   });
 });
 
@@ -191,13 +201,13 @@ const likePost = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
   if (!validateObjectId(id)) {
-    throw new AppError('Invalid post ID', 400);
+    throw new AppError("Invalid post ID", 400);
   }
 
   const post = await Post.findById(id);
 
   if (!post) {
-    throw new AppError('Post not found', 404);
+    throw new AppError("Post not found", 404);
   }
 
   post.likes += 1;
@@ -205,7 +215,7 @@ const likePost = asyncHandler(async (req, res) => {
 
   res.json({
     success: true,
-    likes: post.likes
+    likes: post.likes,
   });
 });
 
@@ -215,5 +225,5 @@ module.exports = {
   createPost,
   updatePost,
   deletePost,
-  likePost
+  likePost,
 };
