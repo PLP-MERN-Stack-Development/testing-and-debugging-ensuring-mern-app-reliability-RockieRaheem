@@ -5,6 +5,7 @@ This assignment focuses on implementing comprehensive testing strategies for a M
 ## 🎯 Assignment Overview
 
 This project demonstrates:
+
 1. ✅ Complete testing environment setup for both client and server
 2. ✅ Unit tests for React components and server functions
 3. ✅ Integration tests for API endpoints
@@ -130,11 +131,13 @@ npm run client
 ### 1. Unit Testing
 
 **Client-Side Unit Tests:**
+
 - React components (Button, Input, Form, PostCard, PostList)
 - Custom hooks (useFetch, useForm)
 - Utility functions (validation, formatting, API client)
 
 **Server-Side Unit Tests:**
+
 - Authentication utilities (JWT generation/verification)
 - Validation utilities (email, password, pagination)
 - Middleware functions (authentication, authorization)
@@ -144,12 +147,14 @@ npm run client
 ### 2. Integration Testing
 
 **API Endpoint Tests:**
+
 - Authentication (register, login, profile management)
 - Posts CRUD operations (create, read, update, delete)
 - Authorization and access control
 - Error handling and validation
 
 **Database Integration:**
+
 - Uses MongoDB Memory Server for isolated testing
 - Automatic setup and teardown
 - No dependencies on external databases
@@ -157,6 +162,7 @@ npm run client
 ### 3. End-to-End Testing
 
 **Critical User Flows:**
+
 - User registration and login
 - Post creation and management
 - Like functionality
@@ -206,23 +212,25 @@ cd client && npm run test:e2e:headless
 
 Current test coverage:
 
-| Type | Statements | Branches | Functions | Lines |
-|------|-----------|----------|-----------|-------|
-| Client | 75%+ | 70%+ | 75%+ | 75%+ |
-| Server | 80%+ | 75%+ | 80%+ | 80%+ |
-| Overall | 77%+ | 72%+ | 77%+ | 77%+ |
+| Type    | Statements | Branches | Functions | Lines |
+| ------- | ---------- | -------- | --------- | ----- |
+| Client  | 75%+       | 70%+     | 75%+      | 75%+  |
+| Server  | 80%+       | 75%+     | 80%+      | 80%+  |
+| Overall | 77%+       | 72%+     | 77%+      | 77%+  |
 
 ## 🐛 Debugging Techniques Implemented
 
 ### 1. Server-Side Debugging
 
 **Winston Logger:**
+
 - Structured logging with different levels (error, warn, info, debug)
 - File-based logging (error.log, combined.log)
 - Console logging for development
 - Request/response logging with Morgan
 
 **Global Error Handler:**
+
 - Centralized error handling middleware
 - Custom AppError class for operational errors
 - Mongoose error handling (validation, duplicate keys, cast errors)
@@ -230,6 +238,7 @@ Current test coverage:
 - Development vs production error responses
 
 **Performance Monitoring:**
+
 - Request duration tracking
 - Slow request detection (>1s)
 - Memory usage monitoring
@@ -237,17 +246,20 @@ Current test coverage:
 ### 2. Client-Side Debugging
 
 **Error Boundaries:**
+
 - Catch and handle React component errors
 - Fallback UI for error states
 - Error logging and reporting
 - Development mode error details
 
 **Console Logging:**
+
 - Structured logging for API calls
 - Error tracking for failed requests
 - Performance measurements
 
 **Browser DevTools Integration:**
+
 - React DevTools compatible
 - Source maps for debugging
 - Network request inspection
@@ -255,21 +267,25 @@ Current test coverage:
 ### 3. Common Issues Addressed
 
 **Authentication Issues:**
+
 - Token expiration handling
 - Invalid token detection
 - Missing authorization headers
 
 **Database Issues:**
+
 - Connection error handling
 - Query validation
 - Transaction rollback
 
 **API Errors:**
+
 - Network timeout handling
 - 404 and 500 error pages
 - Graceful degradation
 
 **Validation Errors:**
+
 - Client-side form validation
 - Server-side data validation
 - User-friendly error messages
@@ -351,4 +367,4 @@ For questions or issues, please contact the instructor or refer to the Week6-Ass
 
 ---
 
-**Note:** This is a comprehensive testing and debugging assignment for MERN Stack Development. All tests are implemented and ready to run. The application includes production-ready error handling, logging, and monitoring features. 
+**Note:** This is a comprehensive testing and debugging assignment for MERN Stack Development. All tests are implemented and ready to run. The application includes production-ready error handling, logging, and monitoring features.
