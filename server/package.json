@@ -1,0 +1,42 @@
+{
+  "name": "mern-testing-server",
+  "version": "1.0.0",
+  "description": "Express server with comprehensive testing",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "jest --testPathPattern=server/tests",
+    "test:unit": "jest --testPathPattern=server/tests/unit",
+    "test:integration": "jest --testPathPattern=server/tests/integration",
+    "test:watch": "jest --watch --testPathPattern=server/tests",
+    "test:coverage": "jest --coverage --testPathPattern=server/tests",
+    "setup-test-db": "node scripts/setupTestDb.js"
+  },
+  "keywords": [
+    "express",
+    "testing",
+    "jest",
+    "supertest"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.0",
+    "morgan": "^1.10.0",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "mongodb-memory-server": "^9.1.0",
+    "nodemon": "^3.0.1",
+    "supertest": "^6.3.3"
+  }
+}
